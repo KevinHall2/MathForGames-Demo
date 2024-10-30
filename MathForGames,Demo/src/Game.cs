@@ -10,6 +10,53 @@ namespace MathForGames_Demo
 {
     internal class Game
     {
+        private static List<Scene> _scenes;
+
+        private static Scene _currentScene;
+
+        public static Scene CurrentScene
+        {
+            get => _currentScene;
+            set
+            {
+                if (_currentScene != null)
+                    _currentScene.End();
+                _currentScene = value;
+                _currentScene.Start();
+            }
+        }
+
+        public Game()
+        {
+            _scenes = new List<Scene>();
+        }
+
+        public static void AddScene(Scene scene)
+        {
+            if (!_scenes.Contains(scene))
+                _scenes.Add(scene);
+
+            if (_currentScene == null)
+                CurrentScene = scene;
+        }
+
+        public static Scene GetScene(int index)
+        {
+            if (_scenes.Count <= 0 || _scenes.Count <= index || index < 0)
+                return null;
+
+            return _scenes[index];
+        }
+
+        public static bool RemoveScene(Scene scene)
+        {
+            bool removed = _scenes.Remove(scene);
+            if (_currentScene == scene)
+                CurrentScene = GetScene(0);
+
+            return removed;
+        }
+
         public void Run()
         {
 
@@ -21,8 +68,7 @@ namespace MathForGames_Demo
             long lastTime = 0;
 
 
-            Scene testScene = new Scene();
-            testScene.Start();
+            Scene testScene = new TestScene();
 
 
             Raylib.InitWindow(800, 450, "raylib [core] example - basic window");
@@ -35,6 +81,8 @@ namespace MathForGames_Demo
 
                 Raylib.BeginDrawing();
                 Raylib.ClearBackground(Color.White);
+
+
                 Raylib.DrawText("Congrats! You created your first window!", 190, 200, 20, Color.Gray);
                 Raylib.EndDrawing();
 
@@ -42,10 +90,10 @@ namespace MathForGames_Demo
                 lastTime = currentTime;
             }
 
-
-
+            CurrentScene.End();
+            
             Raylib.CloseWindow();
-            testScene.End();
+
             
         }
     }

@@ -10,9 +10,7 @@ namespace MathForGames_Demo
     {
         private List<Actor> _actors;
 
-        private static Scene _currentScene;
 
-        public static Scene CurrentScene { get => _currentScene; }
 
         public void AddActor(Actor actor)
         {
@@ -26,8 +24,6 @@ namespace MathForGames_Demo
         }
         public virtual void Start()
         {
-            if (_currentScene == null)
-                _currentScene = this;
 
             _actors = new List<Actor>();
         }
