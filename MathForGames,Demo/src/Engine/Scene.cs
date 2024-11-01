@@ -37,6 +37,22 @@ namespace MathForGames_Demo
 
                 actor.Update(deltaTime);
             }
+
+            //checks for collision
+            for (int row = 0; row < _actors.Count; row++)
+            {
+                for (int column = row; column < _actors.Count; column++)
+                {
+                    if (row == column)
+                        continue;
+
+                    if (_actors[row].Collider != null && _actors[column].Collider != null)
+                    {
+                        _actors[row].Collider.CheckCollision(_actors[column]);
+                        _actors[column].OnCollision(_actors[row]);
+                    }
+                }
+            }
         }
 
         public virtual void End()

@@ -21,9 +21,17 @@ namespace MathForGames_Demo
             movementInput.y += Raylib.IsKeyDown(KeyboardKey.A);
             movementInput.x -= Raylib.IsKeyDown(KeyboardKey.S);
             movementInput.x += Raylib.IsKeyDown(KeyboardKey.D);
-            Vector2 detalMovement = movementInput.Normalized * Speed * (float)deltaTime;
+            Vector2 deltaMovement = movementInput.Normalized * Speed * (float)deltaTime;
 
-            Transform.Translate(deltaMovement);
+            if (deltaMovement.Magnitude != 0)
+                Transform.LocalPosiiton += (deltaMovement);
+
+            Raylib.DrawCircleV(Transform.GlobalPosition, Transform.GlobalScale.x / 2 * 100, Color.Blue);
+        }
+
+        public override void OnCollision(Actor other)
+        {
+            _color = Color.Red;
         }
     }
 }
