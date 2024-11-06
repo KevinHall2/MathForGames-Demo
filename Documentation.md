@@ -23,6 +23,8 @@ _Underlined Text_
 
 Subscript text: H~2~O 
 
+Superscript text: x^2^
+
 Quoted Text
 `This is a single line code block.`
 
@@ -34,7 +36,7 @@ code block.
 
 [This is a link](google.com)
 
-<!-- Links an image. This is a relative path to the -->
+<!-- Links an image. This is a relative path to the markdown file-->
 ![Image Text](
 
 These are footnotes. [^1] [^2]
@@ -53,9 +55,11 @@ Emoji: :skull:
 - This is an unordered list.
 - Second item in the list.
 - Third item in the list.
+
+
 <!-- The colons in the second line determines whether the text is left centered, middle centered, or right centered-->
 This is a table: 
-|Header 1 | Header 2 | Header 3|
+|  Header 1 | Header 2 | Header 3|
 | :-- | :--: | --:|
 | item 1 | item 2 | item 3 |
 | item 4 |  | item 5 |
