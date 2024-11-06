@@ -11,7 +11,7 @@ namespace MathForGames_Demo
         private Actor _owner;
         private bool _enabled;
         private bool _started;
-        public Actor Owner { get => _owner; }
+        public Actor Owner { get => _owner; set => _owner = value; }
         public bool Enabled
         {
             get => _enabled;
@@ -34,8 +34,9 @@ namespace MathForGames_Demo
 
         public bool Started { get => _started; }
 
-        public Component(Actor owner)
+        public Component(Actor owner = null)
         {
+            
             _owner = owner;
             _enabled = true;
             _started = false;
@@ -43,7 +44,11 @@ namespace MathForGames_Demo
 
         public virtual void Start() { _started = true; }
 
-        public virtual void Update() { }
+        public virtual void Update()
+        {
+            if (Owner == null)
+                throw new NullReferenceException();
+        }
        
         public virtual void End() { }
 

@@ -143,10 +143,11 @@ namespace MathForGames_Demo
             return component;
         }
 
-        public T AddComponent<T>() where T : Component
+        public T AddComponent<T>() where T : Component, new()
         {
             //makes a new component that is owned by this actor that is then cast to the type given with T
-            T component = (T)new Component(this);
+            T component = new T();
+            component.Owner = this;
             return AddComponent(component);
         }
 
