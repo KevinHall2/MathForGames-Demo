@@ -12,6 +12,8 @@ namespace MathForGames_Demo
     {
         public float Speed { get; set; } = 50;
 
+        
+
         public override void Update(double deltaTime)
         {
             base.Update(deltaTime);
@@ -24,7 +26,7 @@ namespace MathForGames_Demo
             Vector2 deltaMovement = movementInput.Normalized * Speed * (float)deltaTime;
 
             if (deltaMovement.Magnitude != 0)
-                Transform.LocalPosiiton += (deltaMovement);
+                Transform.LocalPosition += (deltaMovement);
 
             Raylib.DrawCircleV(Transform.GlobalPosition, Transform.GlobalScale.x / 2 * 100, Color.Blue);
         }

@@ -44,7 +44,7 @@ namespace MathForGames_Demo
 
         public virtual void Start() { _started = true; }
 
-        public virtual void Update()
+        public virtual void Update(double deltaTime)
         {
             if (Owner == null)
                 throw new NullReferenceException();

@@ -18,8 +18,7 @@ namespace MathForGames_Demo
             AddActor(actor);
             actor.Collider = new CircleCollider(actor, 100);
 
-            _theLad = Actor.Instantiate(new Actor("Lad"), null, new Vector2(100, 100), 0);
-            _theLad.Collider = new CircleCollider(_theLad, 50);
+
         }
 
         public override void Update(double deltaTime)
