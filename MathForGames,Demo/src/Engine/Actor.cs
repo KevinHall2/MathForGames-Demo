@@ -14,7 +14,8 @@ namespace MathForGames_Demo
         private bool _started = false;
         private bool _enabled = true;
 
-        private Component[] _components; 
+        private Component[] _components;
+        private Component[] _componentsToRemove;
 
         public bool Started { get => _started; }
 
@@ -108,6 +109,9 @@ namespace MathForGames_Demo
                 }
                 component.Update(deltaTime);
             }
+
+            //removes components that should be removed
+            RemoveComponentsToBeRemoved();
         }
 
         public virtual void End()
@@ -159,35 +163,56 @@ namespace MathForGames_Demo
             {
                 return false;
             }
-            //edge case for only having one component
+
             if (_components.Length == 1 && _components[0] == component)
             {
-                _components = new Component[0];
+                //adds a component to _componentsToRemove
+                AddComponentToRemove(component);
                 return true;
             }
-            //creates a temp array that is one slot smaller than the original _components
-            Component[] temp = new Component[_components.Length - 1];
-            bool componentRemoved = false;
-            //deep copies _component into the temp variable minus the one component
-            int j = 0;
-            for (int i = 0; j < _components.Length -1; i++)
+
+            //loops through _component
+            foreach (Component comp in _components)
             {
-                if (_components[i] != component)
+                if (comp == component)
                 {
-                    temp[j] = _components[i];
-                    j++;
-                }
-                else
-                {
-                    componentRemoved = true;
+                    //adds a component to _componentsToRemove
+                    AddComponentToRemove(comp);
+
+                    return true;
                 }
             }
-            //if a component was removed, assign the temp variable to _components
-            if (componentRemoved)
-            {
-                _components = temp;
-            }
-            return componentRemoved;
+
+            return false;
+            ////edge case for only having one component
+            //if (_components.Length == 1 && _components[0] == component)
+            //{
+            //    _components = new Component[0];
+            //    return true;
+            //}
+            ////creates a temp array that is one slot smaller than the original _components
+            //Component[] temp = new Component[_components.Length - 1];
+            //bool componentRemoved = false;
+            ////deep copies _component into the temp variable minus the one component
+            //int j = 0;
+            //for (int i = 0; j < _components.Length -1; i++)
+            //{
+            //    if (_components[i] != component)
+            //    {
+            //        temp[j] = _components[i];
+            //        j++;
+            //    }
+            //    else
+            //    {
+            //        componentRemoved = true;
+            //    }
+            //}
+            ////if a component was removed, assign the temp variable to _components
+            //if (componentRemoved)
+            //{
+            //    _components = temp;
+            //}
+            //return componentRemoved;
         }
 
         public bool RemoveComponent<T>() where T : Component
@@ -237,6 +262,70 @@ namespace MathForGames_Demo
             }
 
             return result;
+        }
+
+        private void AddComponentToRemove(Component comp)
+        {
+            //ensure the component is not already being removed
+            foreach (Component component in _componentsToRemove)
+            {
+                if (component == comp)
+                {
+                    return;
+                }
+            }
+            //creates a temporary array that is one slot larger than the original
+            Component[] temp = new Component[_componentsToRemove.Length + 1];
+            //deep copies _componentsToRemove into the temp variable
+            for (int i = 0; i < _componentsToRemove.Length; i++)
+            {
+                temp[i] = _componentsToRemove[i];
+            }
+
+            //set the last index in temp to the component we wish to add
+            temp[temp.Length - 1] = comp;
+
+            //store temp in _componentsToRemove
+            _componentsToRemove = temp;
+        }
+
+        private void RemoveComponentsToBeRemoved()
+        {
+            //temporary array for _components
+            Component[] tempComponents = new Component[_components.Length];
+
+            //deep copies the array, removing the elements in _componentsToRemove
+
+            int j = 0;
+            for(int i = 0; i < _components.Length; i++)
+            {
+                //loops through components to remove and check if any of them are equal to this one
+                bool removed = false;
+                foreach (Component component in _componentsToRemove)
+                {
+                    if (_components[i] == component)
+                    {
+                        removed = true;
+                        break;
+                    }
+                }
+                //if a component to remove wasn't found, copy the item and incrememnt the temp array
+                if (!removed)
+                {
+                    tempComponents[j] = _components[i];
+                    j++;
+                }
+            }
+
+            //trims the array
+            Component[] result = new Component[_components.Length - _componentsToRemove.Length];
+            for (int i = 0; i < result.Length; i++)
+            {
+                result[i] = tempComponents[i];
+            }
+
+            //sets _components
+            _components = result;
         }
     }
 }
