@@ -83,7 +83,7 @@ namespace MathForGames_Demo
                 Raylib.ClearBackground(Color.White);
 
 
-                Raylib.DrawText("Congrats! You created your first window!", 190, 200, 20, Color.Gray);
+                
                 Raylib.EndDrawing();
 
                 deltaTime = (currentTime - lastTime) / 1000.0;
