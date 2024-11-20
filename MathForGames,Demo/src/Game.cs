@@ -69,6 +69,7 @@ namespace MathForGames_Demo
 
 
             Scene testScene = new TestScene();
+            Actor testActor = new TestActor();
 
 
             Raylib.InitWindow(800, 450, "raylib [core] example - basic window");
@@ -77,7 +78,7 @@ namespace MathForGames_Demo
             {
                 currentTime = stopwatch.ElapsedMilliseconds;
 
-;
+
 
                 Raylib.BeginDrawing();
                 Raylib.ClearBackground(Color.White);

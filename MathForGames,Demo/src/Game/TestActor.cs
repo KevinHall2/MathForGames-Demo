@@ -28,6 +28,8 @@ namespace MathForGames_Demo
             if (deltaMovement.Magnitude != 0)
                 Transform.LocalPosition += (deltaMovement);
 
+
+
             Raylib.DrawCircleV(Transform.GlobalPosition, Transform.GlobalScale.x / 2 * 100, Color.Blue);
         }
 
