@@ -12,16 +12,33 @@ namespace MathForGames_Demo
     {
         public float Speed { get; set; } = 50;
 
+        float _playerRadius = 10;
+
+        public float PlayerRadius
+        {
+            get => _playerRadius;
+        }
+
+
+        public static Vector2 PlayerForward
+        {
+            get
+            {
+                return new Vector2(0, 1).Normalized;
+            }
+        }
         
+
+
 
         public override void Update(double deltaTime)
         {
             base.Update(deltaTime);
 
             Vector2 movementInput = new Vector2();
-            movementInput.y -= Raylib.IsKeyDown(KeyboardKey.W);
-            movementInput.y += Raylib.IsKeyDown(KeyboardKey.A);
-            movementInput.x -= Raylib.IsKeyDown(KeyboardKey.S);
+            movementInput.y -= Raylib.IsKeyDown(KeyboardKey.S);
+            movementInput.y += Raylib.IsKeyDown(KeyboardKey.W);
+            movementInput.x -= Raylib.IsKeyDown(KeyboardKey.A);
             movementInput.x += Raylib.IsKeyDown(KeyboardKey.D);
             Vector2 deltaMovement = movementInput.Normalized * Speed * (float)deltaTime;
 
@@ -30,7 +47,7 @@ namespace MathForGames_Demo
 
 
 
-            Raylib.DrawCircleV(Transform.GlobalPosition, Transform.GlobalScale.x / 2 * 100, Color.Blue);
+
         }
 
         public override void OnCollision(Actor other)

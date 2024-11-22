@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Raylib_cs;
 using System.Diagnostics;
+using MathLibrary;
+using System.Xml.Linq;
 
 namespace MathForGames_Demo
 {
@@ -67,12 +69,18 @@ namespace MathForGames_Demo
             double deltaTime = 1;
             long lastTime = 0;
 
+            Raylib.InitWindow(800, 450, "raylib [core] example - basic window");
+
+            Vector2 screenDimensions = new MathLibrary.Vector2(Raylib.GetScreenWidth(), Raylib.GetScreenHeight());
+
+            Vector2 playerPosition = new Vector2(screenDimensions.x * 0.5f, screenDimensions.y * 0.75f);
 
             Scene testScene = new TestScene();
-            Actor testActor = new TestActor();
+            TestActor testActor = new TestActor();
+            
 
 
-            Raylib.InitWindow(800, 450, "raylib [core] example - basic window");
+
 
             while (!Raylib.WindowShouldClose())
             {
@@ -83,8 +91,18 @@ namespace MathForGames_Demo
                 Raylib.BeginDrawing();
                 Raylib.ClearBackground(Color.White);
 
+                //drawing player forward
+                Raylib.DrawLineV(playerPosition, playerPosition - (TestActor.PlayerForward * 100), Color.Black);
+
+                //drawing the player
+                Raylib.DrawCircleV(playerPosition, testActor.PlayerRadius, Color.Red);
+
+
 
                 
+
+
+
                 Raylib.EndDrawing();
 
                 deltaTime = (currentTime - lastTime) / 1000.0;
