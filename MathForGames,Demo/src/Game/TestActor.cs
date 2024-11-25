@@ -13,12 +13,17 @@ namespace MathForGames_Demo
         public float Speed { get; set; } = 50;
 
         float _playerRadius = 10;
+        Vector2 _playerPosition = new Vector2(400, 225);
 
         public float PlayerRadius
         {
             get => _playerRadius;
         }
 
+        public Vector2 PlayerPosition
+        {
+            get => _playerPosition;
+        }
 
         public static Vector2 PlayerForward
         {
@@ -35,6 +40,8 @@ namespace MathForGames_Demo
         {
             base.Update(deltaTime);
 
+
+
             Vector2 movementInput = new Vector2();
             movementInput.y -= Raylib.IsKeyDown(KeyboardKey.S);
             movementInput.y += Raylib.IsKeyDown(KeyboardKey.W);
@@ -45,7 +52,11 @@ namespace MathForGames_Demo
             if (deltaMovement.Magnitude != 0)
                 Transform.LocalPosition += (deltaMovement);
 
+            //drawing player forward
+            Raylib.DrawLineV(PlayerPosition, PlayerPosition - (PlayerForward * 100), Color.Black);
 
+            //drawing the player
+            Raylib.DrawCircleV(PlayerPosition, PlayerRadius, Color.Red);
 
 
         }

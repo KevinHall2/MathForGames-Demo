@@ -69,16 +69,13 @@ namespace MathForGames_Demo
             double deltaTime = 1;
             long lastTime = 0;
 
-            Raylib.InitWindow(800, 450, "raylib [core] example - basic window");
 
-            Vector2 screenDimensions = new MathLibrary.Vector2(Raylib.GetScreenWidth(), Raylib.GetScreenHeight());
+            Raylib.InitWindow(Raylib.GetMonitorWidth(0), Raylib.GetMonitorHeight(0), "raylib [core] example - basic window");
+            Raylib.ToggleFullscreen();
+            Raylib.SetExitKey(KeyboardKey.Escape);
 
-            Vector2 playerPosition = new Vector2(screenDimensions.x * 0.5f, screenDimensions.y * 0.75f);
-
-            Scene testScene = new TestScene();
-            TestActor testActor = new TestActor();
             
-
+            Game.AddScene(new TestScene());
 
 
 
@@ -91,13 +88,8 @@ namespace MathForGames_Demo
                 Raylib.BeginDrawing();
                 Raylib.ClearBackground(Color.White);
 
-                //drawing player forward
-                Raylib.DrawLineV(playerPosition, playerPosition - (TestActor.PlayerForward * 100), Color.Black);
 
-                //drawing the player
-                Raylib.DrawCircleV(playerPosition, testActor.PlayerRadius, Color.Red);
-
-
+                CurrentScene.Update(deltaTime);
 
                 
 

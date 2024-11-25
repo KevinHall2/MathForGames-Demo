@@ -50,6 +50,7 @@ namespace MathForGames_Demo
             Name = name;
            Transform = new Transform2D(this);
             _components = new Component[0];
+            _componentsToRemove = new Component[0];
         }
         
         public static Actor Instantiate(Actor actor, Transform2D parent = null, string name = "Actor", Vector2 position = new Vector2(), float rotation = 0)
