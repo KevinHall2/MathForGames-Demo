@@ -8,18 +8,18 @@ using Raylib_cs;
 
 namespace MathForGames_Demo
 {
-    internal class TestActor : Actor
+    internal class PlayerActor : Actor
     {
         public float Speed { get; set; } = 10;
 
-        float _playerRadius = 10;
+        Vector2 _playerSize = new Vector2(250, 190);
         Vector2 _playerPosition = new Vector2(400, 225);
 
         
 
-        public float PlayerRadius
+        public Vector2 PlayerSize
         {
-            get => _playerRadius;
+            get => _playerSize;
         }
 
         public Vector2 PlayerPosition
@@ -34,6 +34,7 @@ namespace MathForGames_Demo
                 return new Vector2(0, 1).Normalized;
             }
         }
+
         
         Vector2 movementInput = new Vector2(800, 450);
 
@@ -42,24 +43,22 @@ namespace MathForGames_Demo
         {
             base.Update(deltaTime);
 
-
+            
 
             
-            if (Raylib.IsKeyDown(KeyboardKey.W)) movementInput.y -= 0.5f;
-            if (Raylib.IsKeyDown(KeyboardKey.S)) movementInput.y += 0.5f;
-            if (Raylib.IsKeyDown(KeyboardKey.A)) movementInput.x -= 0.5f;
-            if (Raylib.IsKeyDown(KeyboardKey.D)) movementInput.x += 0.5f;
+            if (Raylib.IsKeyDown(KeyboardKey.W)) movementInput.y -= 0.2f;
+            if (Raylib.IsKeyDown(KeyboardKey.S)) movementInput.y += 0.2f;
+            if (Raylib.IsKeyDown(KeyboardKey.A)) movementInput.x -= 0.2f;
+            if (Raylib.IsKeyDown(KeyboardKey.D)) movementInput.x += 0.2f;
             Vector2 deltaMovement = movementInput.Normalized * Speed * (float)deltaTime;
             
 
             if (deltaMovement.Magnitude != 0)
                 Transform.LocalPosition += (deltaMovement);
 
-            //drawing player forward
-            Raylib.DrawLineV(movementInput, movementInput - (PlayerForward * 100), Color.Black);
 
             //drawing the player
-            Raylib.DrawCircleV(movementInput, PlayerRadius, Color.Red);
+            Raylib.DrawRectangleV(movementInput, PlayerSize, Color.Red);
 
 
         }

@@ -76,7 +76,10 @@ namespace MathForGames_Demo
 
             
             Game.AddScene(new TestScene());
-
+            Actor playerActor = new PlayerActor();
+            Actor.Instantiate(playerActor);
+            Component rotationComponent = new RotationComponent(playerActor);
+            playerActor.AddComponent(rotationComponent);
 
 
             while (!Raylib.WindowShouldClose())

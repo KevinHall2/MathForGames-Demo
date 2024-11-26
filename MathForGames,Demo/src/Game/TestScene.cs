@@ -13,7 +13,7 @@ namespace MathForGames_Demo
         {
             base.Start();
 
-            Actor actor = new TestActor();
+            Actor actor = new PlayerActor();
             actor.Transform.LocalPosition = new Vector2(200, 200);
             AddActor(actor);
             actor.Collider = new CircleCollider(actor, 100);
