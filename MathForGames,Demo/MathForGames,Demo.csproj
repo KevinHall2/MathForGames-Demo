@@ -14,4 +14,10 @@
     <PackageReference Include="Raylib-cs" Version="6.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="MathLibrary">
+      <HintPath>lib\MathLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

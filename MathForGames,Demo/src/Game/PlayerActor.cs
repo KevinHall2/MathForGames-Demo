@@ -12,19 +12,20 @@ namespace MathForGames_Demo
     {
         public float Speed { get; set; } = 10;
 
-        Vector2 _playerSize = new Vector2(250, 190);
-        Vector2 _playerPosition = new Vector2(400, 225);
+        Vector2 _playerSize = new Vector2(150, 90);
+        Vector2 _playerPosition = new Vector2();
 
-        
+        public static Actor transformOwner = new Actor();
+        public static Transform2D transformObject = new Transform2D(transformOwner);
 
         public Vector2 PlayerSize
         {
             get => _playerSize;
         }
 
-        public Vector2 PlayerPosition
+        public static Vector2 PlayerPosition
         {
-            get => _playerPosition;
+            get => transformObject.LocalPosition;
         }
 
         public static Vector2 PlayerForward
@@ -36,7 +37,7 @@ namespace MathForGames_Demo
         }
 
         
-        Vector2 movementInput = new Vector2(800, 450);
+        Vector2 movementInput = PlayerPosition;
 
 
         public override void Update(double deltaTime)
@@ -59,6 +60,7 @@ namespace MathForGames_Demo
 
             //drawing the player
             Raylib.DrawRectangleV(movementInput, PlayerSize, Color.Red);
+            Raylib.DrawLineV(transformObject.GlobalPosition, transformObject.GlobalPosition + (transformObject.Forward * 400), Color.Black);
 
 
         }
