@@ -12,13 +12,15 @@ namespace MathForGames_Demo
     {
         public float Speed { get; set; } = 10;
 
-        Vector2 _playerSize = new Vector2(150, 90);
+        int _playerSize = 4;
         Vector2 _playerPosition = new Vector2();
+        float _playerRadius = 150.0f;
+        float _playerRotation = 0.0f;
 
         public static Actor transformOwner = new Actor();
         public static Transform2D transformObject = new Transform2D(transformOwner);
 
-        public Vector2 PlayerSize
+        public int PlayerSize
         {
             get => _playerSize;
         }
@@ -26,6 +28,16 @@ namespace MathForGames_Demo
         public static Vector2 PlayerPosition
         {
             get => transformObject.LocalPosition;
+        }
+
+        public float PlayerRadius
+        {
+            get => _playerRadius;
+        }
+
+        public float PlayerRotation
+        {
+            get => _playerRotation;
         }
 
         public static Vector2 PlayerForward
@@ -59,8 +71,8 @@ namespace MathForGames_Demo
 
 
             //drawing the player
-            Raylib.DrawRectangleV(movementInput, PlayerSize, Color.Red);
-            Raylib.DrawLineV(transformObject.GlobalPosition, transformObject.GlobalPosition + (transformObject.Forward * 400), Color.Black);
+            Raylib.DrawPoly(movementInput, PlayerSize, PlayerRadius, PlayerRotation, Color.Red);
+            Raylib.DrawLineV(movementInput, movementInput + (movementInput * 400), Color.Black);
 
 
         }

@@ -35,7 +35,8 @@ namespace MathForGames_Demo
             base.Update(deltaTime);
             if (Raylib.IsKeyPressed(KeyboardKey.Q))
             {
-                rotationTransform.Rotate(50.0f);
+               rotationTransform.Rotate(50.0f);
+                
                 
             }
 
