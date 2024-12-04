@@ -3,6 +3,7 @@ using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using MathLibrary;
@@ -20,7 +21,9 @@ namespace MathForGames_Demo
 
         //makes a constructor that references the constructor of the base component class
         public RotationComponent(Actor owner) : base(owner)
-        { }
+        {         }
+
+        public static float rotationAngle;
             
         static Matrix3 rotationMatrix = rotationTransform.LocalRotation;
         Vector2 rotationVector = rotationTransform.LocalPosition;
@@ -33,18 +36,23 @@ namespace MathForGames_Demo
         public override void Update(double deltaTime)
         {
             base.Update(deltaTime);
+            float rotationScalar = 0.0f;
             if (Raylib.IsKeyPressed(KeyboardKey.Q))
             {
-               rotationTransform.Rotate(50.0f);
-                
-                
+                rotationScalar += 1.0f;
+                rotationTransform.Rotate(rotationScalar);
+                rotationAngle = rotationTransform.LocalRotationAngle;
+
+                               
             }
 
             if (Raylib.IsKeyPressed(KeyboardKey.E))
             {
-                rotationTransform.Rotate(50.0f);
+                rotationTransform.Rotate(-5.0f);
+                rotationAngle = rotationTransform.LocalRotationAngle;
             }
-            Console.WriteLine(Owner.Transform.LocalRotationAngle);
+            
+            
         }
 
         public override void End()
