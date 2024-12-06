@@ -36,20 +36,20 @@ namespace MathForGames_Demo
         public override void Update(double deltaTime)
         {
             base.Update(deltaTime);
-            float rotationScalar = 0.0f;
+            float rotationScalar = 10.0f;
             if (Raylib.IsKeyPressed(KeyboardKey.Q))
             {
-                rotationScalar += 1.0f;
+                
                 rotationTransform.Rotate(rotationScalar);
-                rotationAngle = rotationTransform.LocalRotationAngle;
+                rotationAngle = rotationTransform.GlobalRotationAngle;
 
                                
             }
 
             if (Raylib.IsKeyPressed(KeyboardKey.E))
             {
-                rotationTransform.Rotate(-5.0f);
-                rotationAngle = rotationTransform.LocalRotationAngle;
+                rotationTransform.Rotate(-(rotationScalar));
+                rotationAngle = rotationTransform.GlobalRotationAngle;
             }
             
             

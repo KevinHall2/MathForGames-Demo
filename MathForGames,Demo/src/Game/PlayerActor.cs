@@ -10,7 +10,7 @@ namespace MathForGames_Demo
 {
     internal class PlayerActor : Actor
     {
-        public float Speed { get; set; } = 10;
+        public float Speed { get; set; } = 120;
 
         int _playerSize = 4;
         float _playerRadius = 150.0f;
@@ -25,7 +25,7 @@ namespace MathForGames_Demo
 
         public static Vector2 PlayerPosition
         {
-            get => transformObject.LocalPosition;
+            get => transformOwner.Transform.GlobalPosition;
         }
 
         public float PlayerRadius
@@ -54,13 +54,30 @@ namespace MathForGames_Demo
         {
             base.Update(deltaTime);
 
-            
 
-            
-            if (Raylib.IsKeyDown(KeyboardKey.W)) movementInput.y -= 0.2f;
-            if (Raylib.IsKeyDown(KeyboardKey.S)) movementInput.y += 0.2f;
-            if (Raylib.IsKeyDown(KeyboardKey.A)) movementInput.x -= 0.2f;
-            if (Raylib.IsKeyDown(KeyboardKey.D)) movementInput.x += 0.2f;
+
+
+            if (Raylib.IsKeyDown(KeyboardKey.W))
+            {               
+                movementInput.y -= 1.0f;
+            }
+
+            if (Raylib.IsKeyDown(KeyboardKey.S))
+            {
+                  movementInput.y += 1.0f;
+            }
+                
+            if (Raylib.IsKeyDown(KeyboardKey.A))
+            {
+                movementInput.x -= 1.0f;
+            }
+               
+            if (Raylib.IsKeyDown(KeyboardKey.D))
+            {
+               movementInput.x += 1.0f;
+            }
+                
+
             Vector2 deltaMovement = movementInput.Normalized * Speed * (float)deltaTime;
             
 
@@ -69,8 +86,8 @@ namespace MathForGames_Demo
 
 
             //drawing the player
-            float scale = 50.0f;
-            Rectangle rect = new Rectangle(Transform.GlobalPosition, Transform.GlobalScale * scale);
+            float scale = 100.0f;
+            Rectangle rect = new Rectangle(Transform.LocalPosition, Transform.GlobalScale * scale);
             Vector2 offSet = new Vector2(scale/2, scale/2);
             Raylib.DrawRectanglePro(rect, new Vector2(0, 0) + offSet, Transform.GlobalRotationAngle, Color.Red);
 

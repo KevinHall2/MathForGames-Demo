@@ -77,7 +77,7 @@ namespace MathForGames_Demo
             
             Game.AddScene(new TestScene());
             Actor playerActor = new PlayerActor();
-            Actor.Instantiate(playerActor);
+            //Actor.Instantiate(playerActor);
             Component rotationComponent = new RotationComponent(playerActor);
             playerActor.AddComponent(rotationComponent);
 
