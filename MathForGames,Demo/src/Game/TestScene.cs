@@ -17,6 +17,9 @@ namespace MathForGames_Demo
 
             Component rotationComponent = new RotationComponent(playerActor);
             playerActor.AddComponent(rotationComponent);
+
+            Component scalingComponent = new ScalingComponent(playerActor);
+            playerActor.AddComponent(scalingComponent);
         }
 
         public override void Update(double deltaTime)
