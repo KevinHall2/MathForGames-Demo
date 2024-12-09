@@ -10,27 +10,19 @@ namespace MathForGames_Demo
 {
     internal class PlayerActor : Actor
     {
-        public float Speed { get; set; } = 120;
+        public float Speed { get; set; } = 100;
 
-        int _playerSize = 4;
-        float _playerRadius = 150.0f;
+        Vector2 _positiveTranslationX = new Vector2(0.5f, 0.0f);
+        Vector2 _positiveTranslationY = new Vector2(0.0f, 0.5f);
+        Vector2 _negativeTranslationX = new Vector2(-0.5f, 0.0f);
+        Vector2 _negativeTranslationY = new Vector2(0.0f, -0.5f);
 
         public static Actor transformOwner = new Actor();
         public static Transform2D transformObject = new Transform2D(transformOwner);
 
-        public int PlayerSize
-        {
-            get => _playerSize;
-        }
-
         public static Vector2 PlayerPosition
         {
             get => transformOwner.Transform.GlobalPosition;
-        }
-
-        public float PlayerRadius
-        {
-            get => _playerRadius;
         }
 
         public float PlayerRotation
@@ -49,6 +41,25 @@ namespace MathForGames_Demo
         
         Vector2 movementInput = PlayerPosition;
 
+        public Vector2 PositiveTranslationX
+        {
+            get => _positiveTranslationX;
+        }
+
+        public Vector2 PositiveTranslationY
+        {
+            get => _positiveTranslationY;
+        }
+
+        public Vector2 NegativeTranslationX
+        {
+            get => _negativeTranslationX;
+        }
+
+        public Vector2 NegativeTranslationY
+        {
+            get => _negativeTranslationY;
+        }
 
         public override void Update(double deltaTime)
         {
@@ -59,22 +70,22 @@ namespace MathForGames_Demo
 
             if (Raylib.IsKeyDown(KeyboardKey.W))
             {               
-                movementInput.y -= 1.0f;
+                Transform.Translate(NegativeTranslationY);
             }
 
             if (Raylib.IsKeyDown(KeyboardKey.S))
             {
-                  movementInput.y += 1.0f;
+                Transform.Translate(PositiveTranslationY);
             }
                 
             if (Raylib.IsKeyDown(KeyboardKey.A))
             {
-                movementInput.x -= 1.0f;
+                Transform.Translate(NegativeTranslationX);
             }
                
             if (Raylib.IsKeyDown(KeyboardKey.D))
             {
-               movementInput.x += 1.0f;
+                Transform.Translate(PositiveTranslationX);
             }
                 
 
@@ -89,11 +100,9 @@ namespace MathForGames_Demo
             float scale = 100.0f;
             Rectangle rect = new Rectangle(Transform.LocalPosition, Transform.GlobalScale * scale);
             Vector2 offSet = new Vector2(scale/2, scale/2);
-            Raylib.DrawRectanglePro(rect, new Vector2(0, 0) + offSet, Transform.GlobalRotationAngle, Color.Red);
 
+            Raylib.DrawRectanglePro(rect, new Vector2(0, 0) + offSet, Transform.GlobalRotationAngle, Color.Red);
             Raylib.DrawLineV(Transform.GlobalPosition, Transform.GlobalPosition + (Transform.Forward * 100), Color.Beige);
-            //Raylib.DrawPoly(movementInput, PlayerSize, PlayerRadius, PlayerRotation, Color.Red);
-            //Raylib.DrawLineV(movementInput, movementInput + (movementInput * 400), Color.Black);
 
 
         }
