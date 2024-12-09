@@ -13,10 +13,7 @@ namespace MathForGames_Demo
 {
     internal class RotationComponent : Component
     {
-        //creates the actor that will function as the owner of the transform object
-        public static Actor componentOwner = new Actor();
         
-
         //makes a constructor that references the constructor of the base component class
         public RotationComponent(Actor owner) : base(owner)
         {         }
