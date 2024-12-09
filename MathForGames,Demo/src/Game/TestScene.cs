@@ -12,13 +12,11 @@ namespace MathForGames_Demo
         public override void Start()
         {
             base.Start();
+            Actor playerActor = Actor.Instantiate(new PlayerActor(), null, "Player", new Vector2(200, 200), 3.14f/4);
+            playerActor.Collider = new CircleCollider(playerActor, 100);
 
-            Actor actor = new PlayerActor();
-            actor.Transform.LocalPosition = new Vector2(200, 200);
-            AddActor(actor);
-            actor.Collider = new CircleCollider(actor, 100);
-
-
+            Component rotationComponent = new RotationComponent(playerActor);
+            playerActor.AddComponent(rotationComponent);
         }
 
         public override void Update(double deltaTime)

@@ -16,17 +16,12 @@ namespace MathForGames_Demo
         //creates the actor that will function as the owner of the transform object
         public static Actor componentOwner = new Actor();
         
-        //creates the transform object and sets componentOwner as the owner
-        public static Transform2D rotationTransform = new Transform2D(componentOwner);
 
         //makes a constructor that references the constructor of the base component class
         public RotationComponent(Actor owner) : base(owner)
         {         }
 
-        public static float rotationAngle;
             
-        static Matrix3 rotationMatrix = rotationTransform.LocalRotation;
-        Vector2 rotationVector = rotationTransform.LocalPosition;
         public override void Start()
         {
             base.Start();
@@ -36,23 +31,19 @@ namespace MathForGames_Demo
         public override void Update(double deltaTime)
         {
             base.Update(deltaTime);
-            float rotationScalar = 10.0f;
-            if (Raylib.IsKeyPressed(KeyboardKey.Q))
+            float rotationScalar = 1.0f;
+            if (Raylib.IsKeyDown(KeyboardKey.Q))
             {
-                
-                rotationTransform.Rotate(rotationScalar);
-                rotationAngle = rotationTransform.GlobalRotationAngle;
-
-                               
+                Console.WriteLine(Owner);
+                Owner.Transform.Rotate(rotationScalar * (float)deltaTime);                              
             }
 
-            if (Raylib.IsKeyPressed(KeyboardKey.E))
+            if (Raylib.IsKeyDown(KeyboardKey.E))
             {
-                rotationTransform.Rotate(-(rotationScalar));
-                rotationAngle = rotationTransform.GlobalRotationAngle;
+                Owner.Transform.Rotate(-(rotationScalar * (float)deltaTime));
             }
-            
-            
+
+            return;
         }
 
         public override void End()
