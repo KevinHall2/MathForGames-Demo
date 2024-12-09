@@ -25,15 +25,6 @@ namespace MathForGames_Demo
             get => transformOwner.Transform.GlobalPosition;
         }
 
-        public static Vector2 PlayerForward
-        {
-            get
-            {
-                return new Vector2(0, 1).Normalized;
-            }
-        }
-
-        
         Vector2 movementInput = PlayerPosition;
 
         public Vector2 PositiveTranslationX
@@ -96,7 +87,7 @@ namespace MathForGames_Demo
             Rectangle rect = new Rectangle(Transform.LocalPosition, Transform.GlobalScale * scale);
             Vector2 offSet = new Vector2(scale/2, scale/2);
 
-            Raylib.DrawRectanglePro(rect, new Vector2(0, 0) + offSet, Transform.LocalRotationAngle * (180/3.14f), Color.Red);
+            Raylib.DrawRectanglePro(rect, new Vector2() + offSet, Transform.LocalRotationAngle * (180/3.14f), Color.Red);
             Raylib.DrawLineV(Transform.GlobalPosition, Transform.GlobalPosition + (Transform.Forward * 100), Color.Beige);
 
 
