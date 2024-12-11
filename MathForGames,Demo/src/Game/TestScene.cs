@@ -15,6 +15,8 @@ namespace MathForGames_Demo
             Actor playerActor = Actor.Instantiate(new PlayerActor(), null, "Player", new Vector2(200, 200), 3.14f/4);
             playerActor.Collider = new CircleCollider(playerActor, 100);
 
+            Actor childActor = Actor.Instantiate(new ChildActor(), PlayerActor.transformObject, "Child", new Vector2(150, 150), 3.14f/4);
+
             Component rotationComponent = new RotationComponent(playerActor);
             playerActor.AddComponent(rotationComponent);
 
