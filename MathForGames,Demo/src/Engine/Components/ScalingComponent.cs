@@ -13,7 +13,7 @@ namespace MathForGames_Demo
         public ScalingComponent(Actor owner) : base(owner)
         {      }
 
-        Vector2 positiveScaleVector = new Vector2(10, 10);
+        Vector2 positiveScaleVector = new Vector2(5, 5);
         Vector2 negativeScaleVector = new Vector2(-10, -10);
 
         public override void Start()

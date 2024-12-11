@@ -60,6 +60,7 @@ namespace MathForGames_Demo
             {
                 _localScale.m00 = value.x;
                 _localScale.m11 = value.y;
+                UpdateTransforms();
             }
         }
 
@@ -125,9 +126,9 @@ namespace MathForGames_Demo
             LocalRotation = Matrix3.CreateRotation(_localRotationAngle + radians);
         }
 
-        public void Scale(Vector2 direction)
+        public void Scale(Vector2 scalar)
         {
-            LocalScale += direction;
+            LocalScale += scalar;
         }
 
         public void AddChild(Transform2D child)
