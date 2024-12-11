@@ -125,6 +125,11 @@ namespace MathForGames_Demo
             LocalRotation = Matrix3.CreateRotation(_localRotationAngle + radians);
         }
 
+        public void Scale(Vector2 direction)
+        {
+            LocalScale += direction;
+        }
+
         public void AddChild(Transform2D child)
         {
             //doesn't add the child if it is this transform's parent

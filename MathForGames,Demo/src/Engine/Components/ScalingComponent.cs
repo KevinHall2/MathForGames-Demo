@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Raylib_cs;
+using MathLibrary;
 
 namespace MathForGames_Demo
 {
@@ -13,7 +13,8 @@ namespace MathForGames_Demo
         public ScalingComponent(Actor owner) : base(owner)
         {      }
 
-        Vector2 scaleVector = new Vector2(10, 10);
+        Vector2 positiveScaleVector = new Vector2(10, 10);
+        Vector2 negativeScaleVector = new Vector2(-10, -10);
 
         public override void Start()
         {
@@ -26,11 +27,19 @@ namespace MathForGames_Demo
 
             if (Raylib.IsKeyPressed(KeyboardKey.F))
             {
-                //Owner.Transform.GlobalScale += scaleVector;
+                Owner.Transform.Scale(positiveScaleVector);
+            }
+
+            if (Raylib.IsKeyPressed(KeyboardKey.G))
+            {
+                Owner.Transform.Scale(negativeScaleVector);
             }
         }
 
-
+        public override void End()
+        {
+            base.End();
+        }
 
 
     }

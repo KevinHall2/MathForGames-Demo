@@ -31,7 +31,6 @@ namespace MathForGames_Demo
             float rotationScalar = 1.0f;
             if (Raylib.IsKeyDown(KeyboardKey.Q))
             {
-                Console.WriteLine(Owner);
                 Owner.Transform.Rotate(rotationScalar * (float)deltaTime);                              
             }
 
