@@ -42,7 +42,9 @@ namespace MathForGames_Demo
 
         public Collider Collider { get; set; }
 
-        public Transform2D Transform { get; protected set; }
+        private Transform2D _transform;
+
+        public Transform2D Transform { get { return _transform; }  protected set { _transform = value; } }
 
 
         public Actor(string name = "Actor")
@@ -63,7 +65,7 @@ namespace MathForGames_Demo
                 parent.AddChild(actor.Transform);
             //adds that actor to the current scene
             Game.CurrentScene.AddActor(actor);
-
+            actor.Transform.SetParent(parent);
             return actor;
         }
 
@@ -113,6 +115,7 @@ namespace MathForGames_Demo
 
             //removes components that should be removed
             RemoveComponentsToBeRemoved();
+            Transform.UpdateTransforms();
         }
 
         public virtual void End()

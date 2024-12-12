@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using MathLibrary;
@@ -101,7 +102,7 @@ namespace MathForGames_Demo
         }
 
 
-        public Transform2D Parent { get => _parent; }
+        public Transform2D Parent { get; set; }
 
         public Transform2D[] Children { get => _children; }
 
@@ -184,6 +185,11 @@ namespace MathForGames_Demo
                 }
             }
             return childRemoved;
+        }
+
+        public void SetParent(Transform2D parent)
+        {
+            _parent = parent;
         }
 
         public void UpdateTransforms()
